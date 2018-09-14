@@ -1,14 +1,14 @@
 sudo: required
 before_install:
-  - apt-get install openjdk-8-jdk
- before_script:
+  - sudo apt-get install openjdk-8-jdk git
+before_script:
   - wget https://d-02.winudf.com/b/apk/Y29tLnhnYW1lLm1pZ29fMjAxODA5MTIwX2Q1NjAxY2Ex?_fn=TUlHT192VjEuMTFfYXBrcHVyZS5jb20uYXBr&_p=Y29tLnhnYW1lLm1pZ28&as=a6a29930492b9b7ae6c8ddb73e3cf1585b9b855b&c=1%7CSOCIAL%7CZGV2PVhpYW9taSUyME1JVUkmdm49VjEuMTEmdmM9MjAxODA5MTIw&k=d70197734fe5d8c0205685b6a4e5637d5b9e1c6b -0 MIGO.apk
   - git clone https://github.com/levyitay/AddSecurityExceptionAndroid.git
- script:
+script:
   - ./addSecurityExceptions.sh MIGO.apk
- after_success:
+after_success:
   - cp $HOME/MIGO.apk $HOME/MIGO-$(date +"%Y%m%d").apk
- deploy:
+deploy:
   skip_cleanup: true
   provider: releases
   file_glob: true
