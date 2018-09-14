@@ -1,1 +1,21 @@
-
+sudo: required
+before_install:
+  - apt-get install openjdk-8-jdk
+ before_script:
+  - wget https://d-02.winudf.com/b/apk/Y29tLnhnYW1lLm1pZ29fMjAxODA5MTIwX2Q1NjAxY2Ex?_fn=TUlHT192VjEuMTFfYXBrcHVyZS5jb20uYXBr&_p=Y29tLnhnYW1lLm1pZ28&as=a6a29930492b9b7ae6c8ddb73e3cf1585b9b855b&c=1%7CSOCIAL%7CZGV2PVhpYW9taSUyME1JVUkmdm49VjEuMTEmdmM9MjAxODA5MTIw&k=d70197734fe5d8c0205685b6a4e5637d5b9e1c6b -0 MIGO.apk
+  - git clone https://github.com/levyitay/AddSecurityExceptionAndroid.git
+ script:
+  - ./addSecurityExceptions.sh MIGO.apk
+ after_success:
+  - cp $HOME/MIGO.apk $HOME/MIGO-$(date +"%Y%m%d").apk
+ deploy:
+  skip_cleanup: true
+  provider: releases
+  file_glob: true
+  api_key:
+    secure: Pw3WXMm79M+LKBk7vjgAMkp4Xecs3O22GUD73Y1uCXxOJANsxeKUOZ13nrlJ9kUS4acDh7q+viBPzMWY6asdOZownSY0DWVySJWC6HNDBvx8GwaiBHvOQsuklfHoOKrzpRlqphkJ1exMHf9zphP00cQ28VQHfbEvAiHSQGUAINvgjS7y3vda3CIwwhrj6OWMdnV/vg4tGPWOS0Kae+ZfH04PMPQyax7wasgbz8GqrIPwO2fCgcnuwxa+Uz1CYF1GcmCfmrreDwBtElRKoaSMcH15Q4WpxySKKEazTbaH5PKsGuKhBfQvmGLVBojVOyiTzquodleZphRmH4yRvQlBPWiwaRnC+Qy1Um5tZOOhsA9Cd+E5a+3HMlczFaSLlFuW7ujYsScSf2a6gj8pQ2HtrOkOy8w/IY33GngdKsLrNXDIz0nOxKLTCagCYj6hkt0AiA73y0nRQlA/pW6+wep6YYiBOtIxLLitEO4Ua+T8kF9Csk6DzK3rOeJDDH+sHQrTJWqWfEWlC5fr3f8/uK+HCx5y9gYByzHgowLz5RIkE7CIrQgJtEvym2qhZA4PG62HVY2t6+sRUB2F40bqxnji2DdyECq3J7H3r5HRT6q8UDsyR9hZL5WAqdLHxgIiBBEmIYQQnDHLANBVrNiWMcpzaB2gmYUkpLyxL22XZL4q0TI=
+  file: "$HOME/*.apk"
+  on:
+    tags: false
+    repo: dbzdivik/random_travis_builds
+    branch: master
